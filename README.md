@@ -8,6 +8,9 @@
 5. При добавлении планеты можно задать ее радиус, цвет, удаленность, скорость вращения;
 6. Система автоматически масштабируется при добавлении планеты.
 
+-Ссылка на видео-демонстрацию и .apk:
+https://cloud.mail.ru/public/Pk4C/7TPJUBaUC
+
 ![1000014129](https://github.com/B-E-B/solar_system/assets/128063667/9901bebc-2a6f-484e-ac54-fa82f771d411)
 ![1000014136](https://github.com/B-E-B/solar_system/assets/128063667/12abf24b-47f5-4552-84b0-dd050ea2e402)
 ![1000014131](https://github.com/B-E-B/solar_system/assets/128063667/20a678a4-93ae-40c2-85ea-3529cb63165b)
