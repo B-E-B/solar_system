@@ -24,18 +24,24 @@ class NewPlanetScreen extends StatelessWidget {
               decoration: const BoxDecoration(
                   gradient: LinearGradient(
                 colors: [Colors.deepPurple, Colors.black, Colors.black, Colors.deepPurple],
+                stops: [0, 0.25, 0.75, 1],
                 begin: Alignment.bottomRight,
                 end: Alignment.topLeft,
               )),
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  SizedBox(
-                    height: 80,
-                    child: Icon(
-                      Icons.language,
-                      size: planet.size,
-                      color: Color(int.parse('0xff${planet.color.toRadixString(16).padLeft(6, '0')}')),
+                  ClipRRect(
+                    borderRadius: BorderRadius.circular(40),
+                    child: ColorFiltered(
+                      colorFilter: ColorFilter.mode(
+                        Color(int.parse('0xff${planet.color.toRadixString(16).padLeft(6, '0')}')),
+                        BlendMode.color,
+                      ),
+                      child: Image(
+                        image: const AssetImage('assets/images/planet.gif'),
+                        width: planet.size,
+                      ),
                     ),
                   ),
                   _paramSlider('Размер', planet.size, (double value) {
@@ -51,18 +57,18 @@ class NewPlanetScreen extends StatelessWidget {
                     _planetSubject.add(_planetSubject.value.copyWith(speed: value.toInt()));
                   }, min: -10, max: 10, divisions: 20),
                   const SizedBox(
-                    height: 20,
+                    height: 25,
                   ),
                   GestureDetector(
                       onTap: () {
-                        Navigator.pop(context, planet.copyWith(rangeFromSun: planet.rangeFromSun * 100));
+                        Navigator.pop(context, planet.copyWith(rangeFromSun: (planet.rangeFromSun + 1) * 100));
                       },
                       child: Container(
                         width: 60,
-                        height: 30,
+                        height: 35,
                         decoration: BoxDecoration(
                           color: Colors.white,
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(20),
                         ),
                         child: const Center(
                           child: Text(
@@ -70,7 +76,8 @@ class NewPlanetScreen extends StatelessWidget {
                             style: TextStyle(color: Colors.deepPurple, fontSize: 24, fontWeight: FontWeight.w500),
                           ),
                         ),
-                      ))
+                      )),
+                  SizedBox(height: MediaQuery.of(context).size.height * 0.275)
                 ],
               ),
             ),

@@ -9,16 +9,17 @@ class SolarSystemScreen extends StatefulWidget {
 }
 
 class _SolarSystemScreenState extends State<SolarSystemScreen> with SingleTickerProviderStateMixin {
-  late AnimationController controller;
+  late AnimationController animController;
+
   List<Planet> planetList = [];
   double maxRangeFromSun = 500;
   @override
   void initState() {
-    controller = AnimationController(
+    animController = AnimationController(
       duration: const Duration(seconds: 10),
       vsync: this,
     );
-    controller.repeat();
+    animController.repeat();
     super.initState();
   }
 
@@ -31,14 +32,13 @@ class _SolarSystemScreenState extends State<SolarSystemScreen> with SingleTicker
       body: Container(
         decoration: BoxDecoration(
             gradient: RadialGradient(
-          radius: 1.5,
+          radius: 2,
           colors: [
-            Colors.grey.withOpacity(0.3),
+
             Colors.black,
-            Colors.deepPurpleAccent.shade200.withOpacity(0.6),
-            Colors.grey.withOpacity(0.5)
+            Colors.deepPurpleAccent.shade200,
           ],
-          stops: const [0.2, 0.4, 0.6, 1],
+          stops: const [0.3, 1],
         )),
         child: Stack(children: [
           FittedBox(
@@ -65,7 +65,7 @@ class _SolarSystemScreenState extends State<SolarSystemScreen> with SingleTicker
             if (newPlanet is PlanetModel) {
               setState(() {
                 planetList.add(Planet(
-                  controller: controller,
+                  controller: animController,
                   planet: newPlanet,
                 ));
                 if (maxRangeFromSun < newPlanet.rangeFromSun + newPlanet.size) {
@@ -80,11 +80,10 @@ class _SolarSystemScreenState extends State<SolarSystemScreen> with SingleTicker
   }
 
   Widget _sun() {
-    return Container(
-      width: 80,
-      height: 80,
-      decoration:
-          const BoxDecoration(gradient: RadialGradient(colors: [Colors.yellow, Colors.transparent], stops: [0.6, 1])),
+    return const Image(
+      image: AssetImage('assets/images/sun.gif'),
+      width: 200,
+      height: 200,
     );
   }
 
